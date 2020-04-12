@@ -4,8 +4,8 @@
 ## The quick and dirty one day implementation to get started ##
 
 **First time with higher cost - 76 % accuracy - lower iteration**
-1785 correct
-221 wrong
+1544 correct
+462 wrong
 
 **Second time with lower cost - 88%**
 1785 correct
