@@ -239,7 +239,7 @@ def sigmoid(z, derv=False):
 
 # Hypothesis hTheta = sigmoid(theta * X)
 
-max_iter = 15000 # change the iteration value
+max_iter = 10000 # change the iteration value
 # max_iter = 2
 cost = np.zeros((max_iter, 1))
 for dummyCounter in range(max_iter):
@@ -300,16 +300,40 @@ for i in range(totalTestData):
 hypothesis = f2(hypothesis)
 
 
+# accuracy alone is insufficient for the model to be evaluated.
+# need to consider the precision and recall.
+
+trueNegative = 0
+truePositive = 0
+falsePositive = 0
+falseNegative = 0
+
 correctClassification  = 0
 wrongClassification = 0
 for i in range(totalTestData):
   if int(hypothesis[i]) == int(yTestingData[i].reshape(-1)):
     correctClassification = correctClassification + 1
+    if (int(yTestingData[i].reshape(-1)) == 1):
+      truePositive = truePositive + 1
+    elif (int(yTestingData[i].reshape(-1)) == 0):
+      trueNegative = trueNegative + 1
   else:
     wrongClassification = wrongClassification + 1
+    if int(hypothesis[i]) == 0 and int(yTestingData[i].reshape(-1)) == 1:
+      falseNegative = falseNegative + 1
+    elif int(hypothesis[i]) == 1 and int(yTestingData[i].reshape(-1)) == 0:
+      falsePositive = falsePositive + 1
 
-print(correctClassification, 'correct')
-print(wrongClassification, 'wrong')
+print(correctClassification, 'correct') # 1863
+print(wrongClassification, 'wrong') # 143
+print(truePositive, 'true positive') # 591
+print(trueNegative, 'true negative') # 1272
+print(falsePositive, 'false positive') # 102
+print(falseNegative, 'false negative')  # 41
+
+# recall = truePositive / (truePositive + falseNegative) == 0.93 when trained with 10000 iteration
+# precision = truePositive / (truePostiive + falsePositive) == 0.85 when trained with 10000 iteration
+
 plt.plot(range(max_iter), cost)
 plt.xlabel("Iterations")
 plt.ylabel("Cost")
