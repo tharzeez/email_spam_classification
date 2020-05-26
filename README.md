@@ -5,10 +5,9 @@
 
 ## The quick and dirty one day implementation to get started ##
 
-**To run the application
-python spam_classifier.py
+To run the application
+**python spam_classifier.py**
 
-**
 
 **First time with higher cost - 76 % accuracy - lower iteration**
 1544 correct
